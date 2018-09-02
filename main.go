@@ -37,8 +37,14 @@ func parseIPPFile(filename string) ([]string, error) {
 }
 
 func main() {
+	var ippPath string
+	if len(os.Args) > 1 {
+		ippPath = os.Args[1]
+	} else {
+		ippPath = ipp
+	}
 	// read ipp.txt for client ip addresses
-	requiredProxyAddresses, err := parseIPPFile(ipp)
+	requiredProxyAddresses, err := parseIPPFile(ippPath)
 	if err != nil {
 		log.Fatal(err)
 	}
