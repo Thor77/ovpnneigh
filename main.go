@@ -59,7 +59,9 @@ func main() {
 
 	lines := strings.Split(string(output), "\n")
 	for _, line := range lines {
-		presentProxyAddresses = append(presentProxyAddresses, strings.Split(line, " ")[0])
+		if len(line) != 0 {
+			presentProxyAddresses = append(presentProxyAddresses, strings.Split(line, " ")[0])
+		}
 	}
 	log.Printf("Proxy is already active for %d addresses: %v\n", len(presentProxyAddresses), presentProxyAddresses)
 
