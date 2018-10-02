@@ -78,7 +78,7 @@ func main() {
 		cmd := exec.Command("/usr/bin/ip", "-6", "neigh", "add", "proxy", address, "dev", networkInterface)
 		err = cmd.Run()
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("Running '%v' failed: %v\n", strings.Join(cmd.Args, " "), err)
 		}
 	}
 }
