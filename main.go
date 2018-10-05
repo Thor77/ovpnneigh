@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"log"
 	"os"
 	"os/exec"
@@ -39,16 +40,11 @@ func parseIPPFile(filename string) ([]string, error) {
 func main() {
 	var networkInterface string
 	var ippPath string
-	if len(os.Args) > 1 {
-		networkInterface = os.Args[1]
-	} else {
-		networkInterface = networkInterfaceDefault
-	}
-	if len(os.Args) > 2 {
-		ippPath = os.Args[2]
-	} else {
-		ippPath = ippPathDefault
-	}
+	flag.StringVar(&networkInterface, "interface", networkInterfaceDefault, "target interface")
+	flag.StringVar(&ippPath, "path", ippPathDefault, "path to ipp.txt")
+
+	flag.Parse()
+
 	// read ipp.txt for client ip addresses
 	requiredProxyAddresses, err := parseIPPFile(ippPath)
 	if err != nil {

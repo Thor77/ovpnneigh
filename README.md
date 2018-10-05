@@ -9,8 +9,9 @@ $ go build
 
 # Usage
 ```
-$ ovpnneigh [path to ipp.txt]
-Found 10 addresses: [...]
-Proxy is already active for 10 addresses: [...]
-0 address left to add: []
+Usage of ./ovpnneigh:
+  -interface string
+    	target interface (default "ens3")
+  -path string
+    	path to ipp.txt (default "/etc/openvpn/server/ipp.txt")
 ```
