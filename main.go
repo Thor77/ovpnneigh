@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-const ipp = "/etc/openvpn/server/ipp.txt"
-const networkInterface = "ens3"
+const ippPathDefault = "/etc/openvpn/server/ipp.txt"
+const networkInterfaceDefault = "ens3"
 
 // thanks https://stackoverflow.com/a/10485970/2683991
 func contains(s []string, e string) bool {
@@ -37,11 +37,17 @@ func parseIPPFile(filename string) ([]string, error) {
 }
 
 func main() {
+	var networkInterface string
 	var ippPath string
 	if len(os.Args) > 1 {
-		ippPath = os.Args[1]
+		networkInterface = os.Args[1]
 	} else {
-		ippPath = ipp
+		networkInterface = networkInterfaceDefault
+	}
+	if len(os.Args) > 2 {
+		ippPath = os.Args[2]
+	} else {
+		ippPath = ippPathDefault
 	}
 	// read ipp.txt for client ip addresses
 	requiredProxyAddresses, err := parseIPPFile(ippPath)
